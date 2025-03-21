@@ -1,4 +1,3 @@
-// internal/handlers/bacen/ccs/relacionamento/handler.go
 package relacionamento
 
 import (

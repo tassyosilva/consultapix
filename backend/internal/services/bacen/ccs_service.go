@@ -1,4 +1,3 @@
-// internal/services/bacen/ccs_service.go
 package bacen
 
 import (
