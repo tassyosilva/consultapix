@@ -1,7 +1,7 @@
 package routes
 
 import (
-	"net/http"
+	_"net/http"
 
 	"github.com/gorilla/mux"
 	"github.com/tassyosilva/consultapix/internal/config"

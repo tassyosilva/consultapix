@@ -15,7 +15,7 @@ import (
 
 func main() {
 	// Definir variáveis de ambiente
-	os.Setenv("DATABASE_URL", "postgresql://usuario:senha@localhost:5432/consultapixccs?schema=public")
+	os.Setenv("DATABASE_URL", "postgresql://postgres:adm2000%21%40@192.168.3.204:5432/consultapixccs")
 	os.Setenv("usernameBC", "USUÁRIO FORNECIDO PELO BACEN. EX. eju**.s-apiccs")
 	os.Setenv("passwordBC", "SENHA DE ACESSO")
 	

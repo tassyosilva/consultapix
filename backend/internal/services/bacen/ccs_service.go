@@ -2,13 +2,14 @@
 package bacen
 
 import (
-	"bytes"
+	_"bytes"
 	"encoding/base64"
+	"encoding/json"
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-	"strings"
+	_"strings"
 	"time"
 
 	"github.com/tassyosilva/consultapix/internal/config"

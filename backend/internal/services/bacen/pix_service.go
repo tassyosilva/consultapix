@@ -394,7 +394,7 @@ func (s *PixService) ConsultarPorCPFCNPJ(cpfCnpj, motivo, cpfResponsavel, lotaca
 	}
 	
 	// Salvar requisição
-	req := &models.RequisicaoPix{
+	requisicao := &models.RequisicaoPix{
 		Data:           time.Now(),
 		CPFResponsavel: cpfResponsavel,
 		Lotacao:        lotacao,
@@ -408,7 +408,7 @@ func (s *PixService) ConsultarPorCPFCNPJ(cpfCnpj, motivo, cpfResponsavel, lotaca
 		Chaves:         chavesModels,
 	}
 	
-	_, err = s.pixRepo.CriarRequisicaoPix(req)
+	_, err = s.pixRepo.CriarRequisicaoPix(requisicao)
 	if err != nil {
 		return nil, err
 	}

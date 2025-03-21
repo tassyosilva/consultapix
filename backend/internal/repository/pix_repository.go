@@ -3,7 +3,7 @@ package repository
 import (
 	"database/sql"
 	"encoding/json"
-	"errors"
+	_"errors"
 
 	"github.com/tassyosilva/consultapix/internal/database"
 	"github.com/tassyosilva/consultapix/internal/database/models"

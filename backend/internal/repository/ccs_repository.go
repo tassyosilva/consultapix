@@ -2,8 +2,8 @@ package repository
 
 import (
 	"database/sql"
-	"encoding/json"
-	"fmt"
+	_"encoding/json"
+	_"fmt"
 
 	"github.com/tassyosilva/consultapix/internal/database"
 	"github.com/tassyosilva/consultapix/internal/database/models"

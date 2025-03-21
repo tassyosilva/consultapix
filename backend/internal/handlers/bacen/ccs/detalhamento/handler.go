@@ -21,7 +21,7 @@ func NewHandler(cfg *config.Config) *Handler {
 
 func (h *Handler) Handle(w http.ResponseWriter, r *http.Request) {
 	// Obter parâmetros da URL
-	cpfResponsavel := r.URL.Query().Get("cpfResponsavel")
+	//cpfResponsavel := r.URL.Query().Get("cpfResponsavel")
 	numeroRequisicao := r.URL.Query().Get("numeroRequisicao")
 	cpfCnpj := r.URL.Query().Get("cpfCnpj")
 	cnpjResponsavel := r.URL.Query().Get("cnpjResponsavel")
