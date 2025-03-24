@@ -4,7 +4,7 @@ import axios from 'axios';
 const getBaseUrl = () => {
     // Verifica se está em ambiente de produção (Docker/Nginx)
     if (window.location.hostname !== 'localhost' || window.location.port === '80') {
-        return '/api';
+        return ''; // Remova o '/api' daqui já que as rotas já incluem isso
     }
     // Em desenvolvimento, usa a URL direta
     return 'http://localhost:8080';
