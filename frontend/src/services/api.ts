@@ -1,8 +1,17 @@
-// src/services/api.ts
 import axios from 'axios';
 
+// Determina a URL base com base no ambiente
+const getBaseUrl = () => {
+    // Verifica se está em ambiente de produção (Docker/Nginx)
+    if (window.location.hostname !== 'localhost' || window.location.port === '80') {
+        return '/api';
+    }
+    // Em desenvolvimento, usa a URL direta
+    return 'http://localhost:8080';
+};
+
 const api = axios.create({
-    baseURL: 'http://localhost:8080',
+    baseURL: getBaseUrl(),
 });
 
 api.interceptors.request.use(
