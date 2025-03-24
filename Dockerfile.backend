@@ -1,0 +1,28 @@
+FROM golang:1.23-alpine AS builder
+WORKDIR /app
+
+# Copiar go.mod e go.sum primeiro para aproveitar o cache de dependências
+COPY backend/go.mod backend/go.sum ./
+RUN go mod download
+
+# Copiar o restante do código
+COPY backend/ ./
+
+# Compilar o aplicativo
+RUN CGO_ENABLED=0 GOOS=linux go build -o consultapix-api ./cmd/aplicacao
+
+# Criar uma imagem mínima para execução
+FROM alpine:latest
+WORKDIR /app
+
+# Instalar certificados para HTTPS
+RUN apk --no-cache add ca-certificates
+
+# Copiar o binário compilado
+COPY --from=builder /app/consultapix-api .
+
+# Expor a porta que a API usa
+EXPOSE 8080
+
+# Comando para executar a aplicação
+CMD ["./consultapix-api"]

@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: consultapix-api
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DATABASE_URL=postgresql://postgres:adm2000%21%40@192.168.3.204:5432/consultapixccs
+      - usernameBC=${BACEN_USERNAME}
+      - passwordBC=${BACEN_PASSWORD}
+      - JWT_SECRET=${JWT_SECRET:-zH4NRP1HMALxxCFnRZABFA7GOJtzU_gIj02alfL1lvI}
+    networks:
+      - consultapix-network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: consultapix-web
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - consultapix-network
+
+networks:
+  consultapix-network:
+    driver: bridge
