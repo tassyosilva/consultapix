@@ -3,6 +3,7 @@ package database
 import (
 	"database/sql"
 	"log"
+	"golang.org/x/crypto/bcrypt"
 )
 
 // SetupTables verifica e cria as tabelas necessárias no banco de dados
@@ -26,6 +27,32 @@ func SetupTables(db *sql.DB) error {
 		return err
 	}
 	log.Println("Tabela 'usuario' verificada/criada com sucesso")
+
+	// Verificar se existe algum usuário administrador
+	var count int
+	err = db.QueryRow("SELECT COUNT(*) FROM usuario WHERE admin = true").Scan(&count)
+	if err != nil {
+		return err
+	}
+
+	// Se não existe nenhum admin, criar um usuário padrão
+	if count == 0 {
+		// Gerar hash da senha
+		hashedPassword, err := bcrypt.GenerateFromPassword([]byte("admin"), bcrypt.DefaultCost)
+		if err != nil {
+			return err
+		}
+
+		// Inserir usuário admin
+		_, err = db.Exec(`
+			INSERT INTO usuario (nome, cpf, email, password, lotacao, matricula, admin) 
+			VALUES ('Administrador', '000.000.000-00', 'admin@admin.com', $1, 'Admin', 'admin', true)
+		`, string(hashedPassword))
+		if err != nil {
+			return err
+		}
+		log.Println("Usuário administrador padrão criado com sucesso")
+	}
 
 	// Tabelas para PIX
 	_, err = db.Exec(`
